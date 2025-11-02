@@ -4,5 +4,5 @@ def main():
         sana = f.read().strip()
         print(sana)
 
-if__name__== "__main__": # type: ignore
+if __name__ == "__main__":
 main()
