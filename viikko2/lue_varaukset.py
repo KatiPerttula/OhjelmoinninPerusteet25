@@ -5,14 +5,5 @@ def main():
         print(varaus)
 
 
-
-
-
-
-
-
-if __name__ == "__main__":
-    main()
-
         
     
