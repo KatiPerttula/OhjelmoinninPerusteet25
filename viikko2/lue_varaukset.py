@@ -4,4 +4,8 @@ def main():
     with open(varaukset, "r", encoding="utf-8") as f:
         varaus = f.read().strip()
 
+        print(varaus)
+
+if __name__ == "__main__":
+    main()
         
