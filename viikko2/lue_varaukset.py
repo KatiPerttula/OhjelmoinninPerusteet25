@@ -1,14 +1,11 @@
 def main():
     varaukset = "varaukset.txt"
 
-try:
+
     with open("varaukset.txt", "r", encoding="utf-8") as f:
         for rivi in f:
             varaus = rivi.strip().split("|")
-except FileNotFoundError:
-    print("Tiedostoa ei löytynyt.")
-except Exception as e:
-    print(f"Virhe: {e}")
+           
 
 
     from datetime import datetime
