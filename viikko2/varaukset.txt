@@ -1,1 +1,2 @@
 123|Anna Virtanen|2025-10-31|10:00|2|19.95|True|Kokoustila A|0401234567|anna.virtanen@example.com
+153|Jone Nikulais|2025-11-28|12:00|5|19.95|False|Kokoustila B|0400111223|jone.nikulais@example.com
