@@ -1,40 +1,41 @@
 from datetime import datetime
+
 def main():
     varaukset = "varaukset.txt"
 
-    with open("varaukset.txt", "r", encoding="utf-8") as f:
+    with open(varaukset, "r", encoding="utf-8") as f:
         for rivi in f:
             varaus = rivi.strip().split("|")
               
-    paiva = datetime.strptime(varaus[2], "%Y-%m-%d").date()
-    suomalainenPaiva = paiva.strftime("%d.%m.%Y")
-    aika = datetime.strptime(varaus[3], "%H:%M").time()
-    suomalainenAika = aika.strftime("%H.%M")
+            paiva = datetime.strptime(varaus[2], "%Y-%m-%d").date()
+            suomalainenPaiva = paiva.strftime("%d.%m.%Y")
+            aika = datetime.strptime(varaus[3], "%H:%M").time()
+            suomalainenAika = aika.strftime("%H.%M")
     
-    Varausnumero = int(varaus[0])
-    Varaaja = varaus[1]
-    Tuntimäärä = float(varaus[4])
-    Tuntihinta = float(varaus[5])
-    Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
-    Kokonaishinta = Tuntimäärä * Tuntihinta
-    Kokonaishinta_str = f"{Kokonaishinta:.2f}".replace(".", ",")
-    Maksettu = varaus[6].lower() == "true"
-    Varauskohde = varaus[7]
-    Puhelinnumero = varaus[8]
-    Sähköposti = varaus[9]
+            Varausnumero = int(varaus[0])
+            Varaaja = varaus[1]
+            Tuntimäärä = float(varaus[4])
+            Tuntihinta = float(varaus[5])
+            Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
+            Kokonaishinta = Tuntimäärä * Tuntihinta
+            Kokonaishinta_str = f"{Kokonaishinta:.2f}".replace(".", ",")
+            Maksettu = varaus[6].lower() == "true"
+            Varauskohde = varaus[7]
+            Puhelinnumero = varaus[8]
+            Sähköposti = varaus[9]
 
-    print(f"Varausnumero:{Varausnumero}")
-    print(f"Varaaja:{Varaaja}")
-    print(f"Tuntimäärä:{Tuntimäärä}")
-    print(f"Tuntihinta:{Tuntihinta_str} $")
-    print(f"Päivämäärä:{suomalainenPaiva}")
-    print(f"Aloitusaika:{suomalainenAika}")
-    print(f"Kokonaishinta:{Kokonaishinta_str} $")
-    print(f"Maksettu: {'Kyllä' if Maksettu else 'Ei'}")
-    print(f"Varauskohde:{Varauskohde}")
-    print(f"Puhelinnumero:{Puhelinnumero}")
-    print(f"Sähköposti:{Sähköposti}")
-    print("-" * 40)  # erotin rivien väliin
+            print(f"Varausnumero:{Varausnumero}")
+            print(f"Varaaja:{Varaaja}")
+            print(f"Tuntimäärä:{Tuntimäärä}")
+            print(f"Tuntihinta:{Tuntihinta_str} €")
+            print(f"Päivämäärä:{suomalainenPaiva}")
+            print(f"Aloitusaika:{suomalainenAika}")
+            print(f"Kokonaishinta:{Kokonaishinta_str} €")
+            print(f"Maksettu: {'Kyllä' if Maksettu else 'Ei'}")
+            print(f"Varauskohde:{Varauskohde}")
+            print(f"Puhelinnumero:{Puhelinnumero}")
+            print(f"Sähköposti:{Sähköposti}")
+            print("-" * 40)  # erotin rivien väliin
 
 if __name__ == "__main__":
     main()
