@@ -38,7 +38,8 @@ def main():
     print(f"Päivämäärä:{suomalainenPaiva}")
     print(f"Aloitusaika:{suomalainenAika}")
     print(f"Kokonaishinta: {float(varaus[4]) * float(varaus[5]):.2f} €") 
-        #print(f"Maksettu:{Maksettu}")
+    
+    #print(f"Maksettu:{Maksettu}")
     print(f"Maksettu: {'Kyllä' if Maksettu else 'Ei'}")
     print(f"Varauskohde:{Varauskohde}")
     print(f"Puhelinnumero:{Puhelinnumero}")
@@ -50,3 +51,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
