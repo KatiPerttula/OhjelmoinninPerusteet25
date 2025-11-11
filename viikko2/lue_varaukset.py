@@ -1,12 +1,15 @@
 def main():
-    
     varaukset = "varaukset.txt"
 
-    
-    with open(varaukset, "r", encoding="utf-8") as f:
-        varaus = f.read().strip()
+try:
+    with open("varaukset.txt", "r", encoding="utf-8") as f:
+        for rivi in f:
+            varaus = rivi.strip().split("|")
+except FileNotFoundError:
+    print("Tiedostoa ei löytynyt.")
+except Exception as e:
+    print(f"Virhe: {e}")
 
-    varaus = varaus.split('|')
 
     from datetime import datetime
     paiva = datetime.strptime(varaus[2], "%Y-%m-%d").date()
@@ -15,15 +18,15 @@ def main():
     suomalainenAika = aika.strftime("%H.%M")
 
     
-
     Varausnumero = int(varaus[0])
     Varaaja = str(varaus[1])
     #Varauspäivä = datetime.date(varaus[2])
     #aloitusaika = datetime.time(varaus[3])
     Tuntimäärä = float(varaus[4])
     Tuntihinta = float(varaus[5])
-    #Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
+    Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
     Kokonaishinta = Tuntimäärä * Tuntihinta
+    Kokonaishinta_str = f"{Kokonaishinta:.2f}".replace(".", ",")
     Maksettu = bool(varaus[6])
     Varauskohde = str(varaus[7])
     Puhelinnumero = str(varaus[8])
@@ -34,12 +37,11 @@ def main():
     print(f"Varausnumero:{Varausnumero}")
     print(f"Varaaja:{Varaaja}")
     print(f"Tuntimäärä:{Tuntimäärä}")
-    print(f"Tuntihinta:{Tuntihinta}")
+    print(f"Tuntihinta:{Tuntihinta_str} $")
     print(f"Päivämäärä:{suomalainenPaiva}")
     print(f"Aloitusaika:{suomalainenAika}")
-    print(f"Kokonaishinta: {float(varaus[4]) * float(varaus[5]):.2f} €") 
-    
-    #print(f"Maksettu:{Maksettu}")
+    print(f"Kokonaishinta:{Kokonaishinta_str} $")
+        #print(f"Maksettu:{Maksettu}")
     print(f"Maksettu: {'Kyllä' if Maksettu else 'Ei'}")
     print(f"Varauskohde:{Varauskohde}")
     print(f"Puhelinnumero:{Puhelinnumero}")
