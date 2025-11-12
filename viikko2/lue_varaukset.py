@@ -13,16 +13,17 @@ def main():
             suomalainenAika = aika.strftime("%H.%M")
     
             Varausnumero = int(varaus[0])
-            Varaaja = varaus[1]
+            Varaaja = str(varaus[1])
             Tuntimäärä = float(varaus[4])
             Tuntihinta = float(varaus[5])
             Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
             Kokonaishinta = Tuntimäärä * Tuntihinta
             Kokonaishinta_str = f"{Kokonaishinta:.2f}".replace(".", ",")
-            Maksettu = varaus[6].lower() == "true"
-            Varauskohde = varaus[7]
-            Puhelinnumero = varaus[8]
-            Sähköposti = varaus[9]
+            Maksettu = bool(varaus[6].lower())== "true"
+            Varauskohde = str(varaus[7])
+            Puhelinnumero = str(varaus[8])
+            Sähköposti = str(varaus[9])
+
 
             print(f"Varausnumero:{Varausnumero}")
             print(f"Varaaja:{Varaaja}")
