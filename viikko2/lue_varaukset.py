@@ -7,14 +7,15 @@ def main():
     with open(varaukset, "r", encoding="utf-8") as f:
         for rivi in f:
             varaus = rivi.strip().split("|")
-              
+            
+            Varausnumero = int(varaus[0])
+            Varaaja = str(varaus[1])
+
             paiva = datetime.strptime(varaus[2], "%Y-%m-%d").date()
             suomalainenPaiva = paiva.strftime("%d.%m.%Y")
             aika = datetime.strptime(varaus[3], "%H:%M").time()
             suomalainenAika = aika.strftime("%H.%M")
-    
-            Varausnumero = int(varaus[0])
-            Varaaja = str(varaus[1])
+
             Tuntimäärä = float(varaus[4])
             Tuntihinta = float(varaus[5])
             Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
@@ -42,10 +43,10 @@ def main():
             print(f"Varauskohde:{Varauskohde}")
             print(f"Puhelinnumero:{Puhelinnumero}")
             print(f"Sähköposti:{Sähköposti}")
-            print(f"Loppumisaika:{Loppumisaika}")
+            print(f"Loppumisaika:{Loppumisaika.strftime('%d.%m.%Y %H.%M')}")
             print("-")
-            
-    print(f"Kaikkien varauksien yhteishinta: {Yhteishinta_str}€")
+
+    print(f"Kaikkien varauksien yhteishinta: {Yhteishinta_str} €")
     
 if __name__ == "__main__":
     main()
