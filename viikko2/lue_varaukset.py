@@ -36,7 +36,7 @@ def main():
             print(f"Varauskohde:{Varauskohde}")
             print(f"Puhelinnumero:{Puhelinnumero}")
             print(f"Sähköposti:{Sähköposti}")
-            print("-" * 40)  # erotin rivien väliin
+            print("-")
 
 if __name__ == "__main__":
     main()
