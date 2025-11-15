@@ -44,9 +44,9 @@ def main():
             print(f"Sähköposti:{Sähköposti}")
             print(f"Loppumisaika:{Loppumisaika}")
             print("-")
-                      
+            
     print(f"Kaikkien varauksien yhteishinta: {Yhteishinta_str}€")
     
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
 
