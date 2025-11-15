@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def main():
     varaukset = "varaukset.txt"
+    Yhteishinta = 0.0
 
     with open(varaukset, "r", encoding="utf-8") as f:
         for rivi in f:
@@ -23,7 +24,12 @@ def main():
             Varauskohde = str(varaus[7])
             Puhelinnumero = str(varaus[8])
             Sähköposti = str(varaus[9])
+            Aloitus = datetime.combine(paiva, aika)
+            Loppumisaika = Aloitus + timedelta(hours=Tuntimäärä)
 
+            Kokonaishinta = Tuntimäärä * Tuntihinta
+            Yhteishinta += Kokonaishinta
+            Yhteishinta_str = f"{Yhteishinta:.2f}".replace(".", ",")
 
             print(f"Varausnumero:{Varausnumero}")
             print(f"Varaaja:{Varaaja}")
@@ -36,8 +42,11 @@ def main():
             print(f"Varauskohde:{Varauskohde}")
             print(f"Puhelinnumero:{Puhelinnumero}")
             print(f"Sähköposti:{Sähköposti}")
+            print(f"Loppumisaika:{Loppumisaika}")
             print("-")
-
-if __name__ == "__main__":
+                      
+    print(f"Kaikkien varauksien yhteishinta: {Yhteishinta_str}€")
+    
+    if __name__ == "__main__":
     main()
 
