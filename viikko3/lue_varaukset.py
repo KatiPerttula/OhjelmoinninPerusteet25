@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-def hae_varausnumero(varaus):
+def hae_varausnumero(varaus): #-> INT: ...
     return int(varaus[0])
 def hae_varaaja(varaus):
     return str(varaus[1])
@@ -18,7 +18,7 @@ def laske_kokonaishinta(varaus):
     Tuntimäärä = float(varaus[4])
     Tuntihinta = float(varaus[5])
     return Tuntimäärä * Tuntihinta
-def hae_maksettu(varaus):
+def hae_maksettu(varaus): # -> bool ...
     return (varaus[6].lower()) == "true"
 def hae_kohde(varaus):
     return str(varaus[7])

@@ -1,1 +1,3 @@
-666|Jönsse Pasanen|2025-10-31|10:00|2|19.95|True|Kokoustila A|0401234567|jönsse.pasanen@example.com|
+666|Jönsse Pasanen|2025-10-31|10:00|2|19.95|True|Kokoustila A|0401234567|josse.pasanen@example.com|
+220|Henri Hermola|2025-11-28|12:00|5|19.95|True|Kokoustila b|04012225566|henri.hermola@example.com|
+985|Mika Toiviainen|2023-01-06|08:00|8|19.95|True|Kokoustila A|040556688|mika.toiviainen@example.com|
