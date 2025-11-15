@@ -48,5 +48,5 @@ def main():
     print(f"Kaikkien varauksien yhteishinta: {Yhteishinta_str}€")
     
     if __name__ == "__main__":
-    main()
+        main()
 
