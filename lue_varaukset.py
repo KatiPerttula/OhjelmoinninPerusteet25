@@ -63,7 +63,8 @@ def main():
             print(f"Varauskohde: {Varauskohde}")
             print(f"Puhelinnumero: {Puhelinnumero}")
             print(f"Sähköposti: {Sähköposti}")
-               
+            
+            #Nope
 if __name__ == "__main__":
     main()
 
