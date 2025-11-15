@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime #timedelta
 
 def hae_varausnumero(varaus):
     return int(varaus[0])
