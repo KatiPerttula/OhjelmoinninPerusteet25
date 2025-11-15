@@ -21,7 +21,7 @@ def main():
             Tuntihinta_str = f"{Tuntihinta:.2f}".replace(".", ",")
             Kokonaishinta = Tuntimäärä * Tuntihinta
             Kokonaishinta_str = f"{Kokonaishinta:.2f}".replace(".", ",")
-            Maksettu = bool(varaus[6].lower())== "true"
+            Maksettu = (varaus[6].lower())== "true"
             Varauskohde = str(varaus[7])
             Puhelinnumero = str(varaus[8])
             Sähköposti = str(varaus[9])
