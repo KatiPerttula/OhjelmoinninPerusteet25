@@ -18,7 +18,7 @@ def laske_kokonaishinta(varaus):
     Tuntimäärä = float(varaus[4])
     Tuntihinta = float(varaus[5])
     return Tuntimäärä * Tuntihinta
-def hae_maksettu(varaus): # -> bool ...
+def hae_maksettu(varaus):
     return (varaus[6].lower()) == "true"
 def hae_kohde(varaus):
     return str(varaus[7])
@@ -63,8 +63,10 @@ def main():
     varaukset = "varaukset.txt"
         
     with open(varaukset, "r", encoding="utf-8") as f:
-            varaus = f.read().strip()
-            varaus = varaus.split("|")
+         for rivi in f:
+            print(rivi.strip())
+            #varaus = f.read().strip()
+            varaus = rivi.strip().split("|")
             tulosta_varaus(varaus)          
 if __name__ == "__main__":
     main()
