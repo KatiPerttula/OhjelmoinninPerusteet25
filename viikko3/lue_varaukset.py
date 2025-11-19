@@ -57,7 +57,7 @@ def tulosta_varaus(varaus):
     print(f"Varauskohde: {Varauskohde}")
     print(f"Puhelinnumero: {Puhelinnumero}")
     print(f"Sähköposti: {Sähköposti}")
-    
+    print("-")
 
 def main():
     varaukset = "varaukset.txt"
