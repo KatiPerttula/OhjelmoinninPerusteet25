@@ -1,8 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
-def hae_varausnumero(varaus): #-> INT: ...
+def hae_varausnumero(varaus):
     return int(varaus[0])
-def hae_varaaja(varaus):
+def hae_varaaja(varaus): 
     return str(varaus[1])
 def hae_paiva(varaus):
     return datetime.strptime(varaus[2], "%Y-%m-%d").date()
@@ -63,12 +63,9 @@ def main():
     varaukset = "varaukset.txt"
         
     with open(varaukset, "r", encoding="utf-8") as f:
-        for rivi in f:
-            varaus = rivi.strip().split("|")
-            tulosta_varaus(varaus)
-            
-            
-            #Nope
+            varaus = f.read().strip()
+            varaus = varaus.split("|")
+            tulosta_varaus(varaus)          
 if __name__ == "__main__":
     main()
 
