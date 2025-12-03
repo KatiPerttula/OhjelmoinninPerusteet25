@@ -117,6 +117,8 @@ def main():
     print(f"{keskiviikonlukemat[3]:6.2f}".replace('.',','), end= "\t")
     print(f"{keskiviikonlukemat[4]:6.2f}".replace('.',','), end= "\t")
     print(f"{keskiviikonlukemat[5]:6.2f}".replace('.',','),)
+    print("...päivän summat...")
+    tuntitiedot("15.10.2025", lukemat)
 
     torstainlukemat = paivantiedot("16.10.2025", lukemat)
     print(f"Torstai         16.10.2025", f"{torstainlukemat[0]:6.2f}".replace('.',','), end= "")
@@ -125,6 +127,8 @@ def main():
     print(f"{torstainlukemat[3]:6.2f}".replace('.',','), end= "\t")
     print(f"{torstainlukemat[4]:6.2f}".replace('.',','), end= "\t")
     print(f"{torstainlukemat[5]:6.2f}".replace('.',','),)
+    print("...päivän summat...")
+    tuntitiedot("16.10.2025", lukemat)
 
     perjantainlukemat = paivantiedot("17.10.2025", lukemat)
     print(f"Perjantai       17.10.2025", f"{perjantainlukemat[0]:6.2f}".replace('.',','), end= "")
@@ -133,6 +137,8 @@ def main():
     print(f"{perjantainlukemat[3]:6.2f}".replace('.',','), end= "\t")
     print(f"{perjantainlukemat[4]:6.2f}".replace('.',','), end= "\t")
     print(f"{perjantainlukemat[5]:6.2f}".replace('.',','),)
+    print("...päivän summat...")
+    tuntitiedot("17.10.2025", lukemat)
 
     lauantainlukemat = paivantiedot("18.10.2025", lukemat)
     print(f"Lauantai        18.10.2025", f"{lauantainlukemat[0]:6.2f}".replace('.',','), end= "")
@@ -141,6 +147,8 @@ def main():
     print(f"{lauantainlukemat[3]:6.2f}".replace('.',','), end= "\t")
     print(f"{lauantainlukemat[4]:6.2f}".replace('.',','), end= "\t")
     print(f"{lauantainlukemat[5]:6.2f}".replace('.',','),)
+    print("...päivän summat...")
+    tuntitiedot("18.10.2025", lukemat)
 
     sunnuntainlukemat = paivantiedot("19.10.2025", lukemat)
     print(f"Sunnuntai       19.10.2025", f"{sunnuntainlukemat[0]:6.2f}".replace('.',','), end= "")
@@ -149,6 +157,8 @@ def main():
     print(f"{sunnuntainlukemat[3]:6.2f}".replace('.',','), end= "\t")
     print(f"{sunnuntainlukemat[4]:6.2f}".replace('.',','), end= "\t")
     print(f"{sunnuntainlukemat[5]:6.2f}".replace('.',','),)
+    print("...päivän summat...")
+    tuntitiedot("19.10.2025", lukemat)
 
 if __name__ == "__main__":
     main
