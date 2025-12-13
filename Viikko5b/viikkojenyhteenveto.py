@@ -1,8 +1,11 @@
+# Copyright (c) 2025 Kati
+
 from datetime import datetime, date
+from typing import List, Dict
 
 
 def muunna_tiedot(kulutusTuotanto: list) -> list:
-    """Muuttaa jokaisen annetun tietorivin tietotyypin oikeiksi"""
+    
     muutettu_tietorivi = []
     muutettu_tietorivi.append(datetime.fromisoformat(kulutusTuotanto[0]))
     muutettu_tietorivi.append(int(kulutusTuotanto[1]))
@@ -13,19 +16,17 @@ def muunna_tiedot(kulutusTuotanto: list) -> list:
     muutettu_tietorivi.append(int(kulutusTuotanto[6]))
     return muutettu_tietorivi
 
-def lue_data(tiedoston_nimi: str) -> list:
-    
+def lue_data(tiedoston_nimi: str) -> list[List]:
     kulutusTuotantoTiedot = []
     with open(tiedoston_nimi, "r", encoding="utf-8") as f:
         next(f)
         for kulutusTuotantoTieto in f:
-            varaus = kulutusTuotantoTieto.strip()
             kulutusTuotantoTieto = kulutusTuotantoTieto.strip()
             kulutusTuotantoTietoSarakkeet = kulutusTuotantoTieto.split(';')
             kulutusTuotantoTiedot.append(muunna_tiedot(kulutusTuotantoTietoSarakkeet))
     return kulutusTuotantoTiedot
     
-def paivantiedot(paiva: str, lukemat: list) -> int:
+def paivantiedot(paiva: str, lukemat: list[List]) -> dict[str, list[str]]:
     pv = int(paiva.split('.')[0])
     kk = int(paiva.split('.')[1])
     vuosi = int(paiva.split('.')[2])
@@ -36,6 +37,7 @@ def paivantiedot(paiva: str, lukemat: list) -> int:
     tuotanto1vaihe = 0
     tuotanto2vaihe = 0
     tuotanto3vaihe = 0
+
     for lukema in lukemat:
         if lukema[0].date() == date(vuosi, kk, pv):
             kulutus1vaihe += lukema[1]
@@ -47,11 +49,19 @@ def paivantiedot(paiva: str, lukemat: list) -> int:
 
    
     return {
-        "kulutus": (kulutus1vaihe + kulutus2vaihe + kulutus3vaihe) / 1000, 
-        "tuotanto": (tuotanto1vaihe + tuotanto2vaihe + tuotanto3vaihe ) / 1000
+         "kulutus": [
+            f"{kulutus1vaihe/1000:.2f}".replace('.', ','),
+            f"{kulutus2vaihe / 1000:.2f}".replace('.', ','),
+            f"{kulutus3vaihe / 1000:.2f}".replace('.', ','),
+        ],
+        "tuotanto": [
+            f"{tuotanto1vaihe / 1000:.2f}".replace('.', ','),
+            f"{tuotanto2vaihe / 1000:.2f}".replace('.', ','),
+            f"{tuotanto3vaihe / 1000:.2f}".replace('.', ',')
+        ]
     }
             
-def tuntitiedot(paiva: str, lukemat: list):
+#def tuntitiedot(paiva: str, lukemat: list):
     pv, kk, vuosi = map(int, paiva.split('.'))
     print(f"\nTuntikohtaiset tiedot ")
     print("Aika       Kulutus [kWh]                  Tuotanto [kWh]")
@@ -69,34 +79,50 @@ def tuntitiedot(paiva: str, lukemat: list):
                   f"{lukema[6]/1000:8.2f}".replace('.', ','))
     print()
 
-
+def muodosta_rivi(viikonpaiva: str, paiva_str: str, yhteenveto: Dict[str, List[str]]) -> str:
+    return (f"{viikonpaiva:<12} {paiva_str:<10} "
+            f"{yhteenveto['kulutus'][0]:>6} {yhteenveto['kulutus'][1]:>7} {yhteenveto['kulutus'][2]:>7} "
+            f"{yhteenveto['tuotanto'][0]:>9} {yhteenveto['tuotanto'][1]:>7} {yhteenveto['tuotanto'][2]:>7}")
+    
+def kirjoita_raportti(viikot: Dict[str, tuple], tiedoston_nimi: str) -> None:
+    viikonpaivat = ["maanantai", "tiistai", "keskiviikko",
+                    "torstai", "perjantai", "lauantai", "sunnuntai"]
+    
 def main():
-    lukemat = lue_data("viikko41.csv")
+    viikko41 = lue_data("viikko41.csv")
+    viikko42 = lue_data("viikko42.csv")
+    viikko43 = lue_data("viikko43.csv")
     
-    print("Viikon 41 sähkökulutus ja -tuotanto (kWh, tunneittain)", end="\n")
-    print(lue_data("viikko41.csv")[0][0])
-    print()
-    
-    
-    paivat = ["06.10.2025","07.10.2025","08.10.2025","09.10.2025","10.10.2025","11.10.2025","12.10.2025"]            
+    viikot = {
+        "Viikko 41": (viikko41, ["06.10.2025","07.10.2025","08.10.2025","09.10.2025","10.10.2025","11.10.2025","12.10.2025"]),
+        "Viikko 42": (viikko42, ["13.10.2025","14.10.2025","15.10.2025","16.10.2025","17.10.2025","18.10.2025","19.10.2025"]),
+        "Viikko 43": (viikko43, ["20.10.2025","21.10.2025","22.10.2025","23.10.2025","24.10.2025","25.10.2025","26.10.2025"])
+    }
+              
     viikonpaivat = ["Maanantai", "Tiistai", "Keskiviikko",
                 "Torstai", "Perjantai", "Lauantai", "Sunnuntai"]
-
-
-    for  pvm in paivat:
-        pv, kk, vuosi = map(int, pvm.split('.'))
-        paiva_obj = datetime(vuosi, kk, pv)
-        viikonpaiva = viikonpaivat[paiva_obj.weekday()]
-        
+    
+    kirjoita_raportti(viikot, "yhteenveto.txt")
+  
      
-        print(".....................................................................")
-        print(f"{viikonpaiva:<12} {pvm:<12}")
-              
-        tuntitiedot(pvm, lukemat)
-        yhteenveto = paivantiedot(pvm, lukemat)
-        print(f"Päivän kokonaiskulutus: {yhteenveto['kulutus']:.2f} kWh")
-        print(f"Päivän kokonaistuotanto: {yhteenveto['tuotanto']:.2f} kWh\n")
+    for viikkonimi, (lukemat, paivat) in viikot.items():
+        print(f"\n{viikkonimi}")
+        print("Viikon sähkökulutus ja -tuotanto (kWh, päivän kokonaiskulutus ja tuotanto)", end="\n")
+        print("Päivä        Pvm         Kulutus [kWh]              Tuotanto [kWh]")
+        print("                         v1      v2      v3         v1      v2      v3")
+        print("---------------------------------------------------------------------------")
+        for pvm in paivat:
+            pv, kk, vuosi = map(int, pvm.split('.'))
+            paiva_obj = datetime(vuosi, kk, pv)
+            viikonpaiva = viikonpaivat[paiva_obj.weekday()]
 
+            yhteenveto = paivantiedot(pvm, lukemat)
+            print(f"{viikonpaiva:<12} {pvm:<10} "
+              f"{yhteenveto['kulutus'][0]:>6} {yhteenveto['kulutus'][1]:>7} {yhteenveto['kulutus'][2]:>7} "
+              f"{yhteenveto['tuotanto'][0]:>9} {yhteenveto['tuotanto'][1]:>7} {yhteenveto['tuotanto'][2]:>7}")
+            if viikonpaiva == "Sunnuntai":
+                print("---------------------------------------------------------------------------")
+    
 
 if __name__ == "__main__":
     main()
