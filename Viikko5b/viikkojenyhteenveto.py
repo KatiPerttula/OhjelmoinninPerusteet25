@@ -29,7 +29,7 @@ def paivantiedot(paiva: str, lukemat: list) -> int:
     pv = int(paiva.split('.')[0])
     kk = int(paiva.split('.')[1])
     vuosi = int(paiva.split('.')[2])
-    lasketutTiedot = []
+    
     kulutus1vaihe = 0
     kulutus2vaihe = 0
     kulutus3vaihe = 0
@@ -46,7 +46,10 @@ def paivantiedot(paiva: str, lukemat: list) -> int:
             tuotanto3vaihe += lukema[6]
 
    
-    return lasketutTiedot
+    return {
+        "kulutus": (kulutus1vaihe + kulutus2vaihe + kulutus3vaihe) / 1000, 
+        "tuotanto": (tuotanto1vaihe + tuotanto2vaihe + tuotanto3vaihe ) / 1000
+    }
             
 def tuntitiedot(paiva: str, lukemat: list):
     pv, kk, vuosi = map(int, paiva.split('.'))
@@ -68,14 +71,14 @@ def tuntitiedot(paiva: str, lukemat: list):
 
 
 def main():
-    lukemat = lue_data("viikko42.csv")
+    lukemat = lue_data("viikko41.csv")
     
-    print("Viikon 42 sähkökulutus ja -tuotanto (kWh, tunneittain)", end="\n")
-    print(lue_data("viikko42.csv")[0][0])
+    print("Viikon 41 sähkökulutus ja -tuotanto (kWh, tunneittain)", end="\n")
+    print(lue_data("viikko41.csv")[0][0])
     print()
     
     
-    paivat = ["13.10.2025","14.10.2025","15.10.2025","16.10.2025","17.10.2025","18.10.2025","19.10.2025"]            
+    paivat = ["06.10.2025","07.10.2025","08.10.2025","09.10.2025","10.10.2025","11.10.2025","12.10.2025"]            
     viikonpaivat = ["Maanantai", "Tiistai", "Keskiviikko",
                 "Torstai", "Perjantai", "Lauantai", "Sunnuntai"]
 
@@ -88,11 +91,12 @@ def main():
      
         print(".....................................................................")
         print(f"{viikonpaiva:<12} {pvm:<12}")
-        
-
-       
+              
         tuntitiedot(pvm, lukemat)
+        yhteenveto = paivantiedot(pvm, lukemat)
+        print(f"Päivän kokonaiskulutus: {yhteenveto['kulutus']:.2f} kWh")
+        print(f"Päivän kokonaistuotanto: {yhteenveto['tuotanto']:.2f} kWh\n")
 
 
 if __name__ == "__main__":
-    main ()
+    main()
