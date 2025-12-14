@@ -12,7 +12,7 @@ def muunna_tiedot(kulutusTuotanto: list) -> list:
     muutettu_tietorivi.append(float(kulutusTuotanto[3].replace(",",".")))
     return muutettu_tietorivi
 
-def lue_data(tiedoston_nimi: str) -> list[List]:
+def lue_data(tiedoston_nimi: str) -> List[List[float]]:
     kulutusTuotantoTiedot = []
     with open(tiedoston_nimi, "r", encoding="utf-8") as f:
         next(f)
@@ -23,14 +23,9 @@ def lue_data(tiedoston_nimi: str) -> list[List]:
 
     return kulutusTuotantoTiedot
 
-def raportti_tiedostoon(raportti) -> None:
+def raportti_tiedostoon(raportti: str) -> None:
     with open("raportti.txt", "w", encoding="utf-8") as f:
-        # jos raportti on lista, kirjoitetaan rivit erikseen
-        if isinstance(raportti, list):
-            for rivi in raportti:
-                f.write(str(rivi) + "\n")
-        else:
-            f.write(str(raportti))
+        f.write(raportti)
 
 def raportti_aikavali(alkupaiva: str, loppupaiva: str, tietokanta: list) -> str:
     alku = datetime.strptime(alkupaiva, "%d.%m.%Y").date()
@@ -103,10 +98,17 @@ def main():
         print("2) Kuukausikohtainen yhteenveto yhdelle kuukaudelle")
         print("3) Vuoden 2025 kokonaisyhteenveto")
         print("4) Lopeta ohjelma")
-        ensimmainen_valinta = int(input("Anna valinta (numero 1-4): "))
+        print("---------------------")
+        try:
+            ensimmainen_valinta = int(input("Anna valinta (numero 1-4): "))
+            print("----------------")
+        except ValueError:
+            print("Virheellinen syöte, anna numero väliltä 1-4.")
+            continue
         if ensimmainen_valinta == 1:
             alkupaiva = input("Anna alkupäivä (pv.kk.vvvv): ")
             loppupaiva = input("Anna loppupäivä (pv.kk.vvvv): ")
+            print("---------------")
             raportti = raportti_aikavali(alkupaiva, loppupaiva, kulutusTuotanto2025)
             print(raportti)
         elif ensimmainen_valinta == 2:
@@ -120,11 +122,12 @@ def main():
             print(raportti)
         elif ensimmainen_valinta == 4:
             print("Lopetetaan ohjelma...")
+            print("Kiitos ja hei hei!")
             break
         else:
             continue
         
-        print("---------------------------------------------------------")
+        print("--------------------")
         print("Mitä haluat tehdä seuraavaksi?")
         print("1) Kirjoita raportti tiedostoon raportti.txt")
         print("2) Luo uusi raportti")
@@ -132,7 +135,7 @@ def main():
         toinen_valinta = int(input("Anna valinta (numero 1-3): "))
         if toinen_valinta == 1:
             raportti_tiedostoon(raportti)
-            print("Raportti kirjoitetaan tiedostoon...")
+            print("Raportti kirjoitettiin tiedostoon raportti.txt..")
         elif toinen_valinta == 2:
             continue
         elif toinen_valinta == 3:
