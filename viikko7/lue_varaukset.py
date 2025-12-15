@@ -27,19 +27,19 @@ def hae_varaukset(varaustiedosto: str) -> list[dict]:
     return varaukset
 
 def vahvistetut_varaukset(varaukset: list[dict]):
-    for varaus in varaukset[1:]:
+    for varaus in varaukset:
         if varaus["varausVahvistettu"]:
             print(f"- {varaus['nimi']}, {varaus['varattuTila']}, {varaus['varauksenPvm'].strftime('%d.%m.%Y')} klo {varaus['varauksenKlo'].strftime('%H.%M')}")
     print()
 
 def pitkat_varaukset(varaukset: list[dict]):
-    for varaus in varaukset[1:]:
+    for varaus in varaukset:
         if(varaus["varauksenKesto"] >= 3):
             print(f"- {varaus['nimi']}, {varaus['varauksenPvm'].strftime('%d.%m.%Y')} klo {varaus['varauksenKlo'].strftime('%H.%M')}, kesto {varaus['varauksenKesto']} h, {varaus['varattuTila']}")
     print()
 
 def varausten_vahvistusstatus(varaukset: list[dict]):
-    for varaus in varaukset[1:]:
+    for varaus in varaukset:
         status = "Vahvistettu" if varaus["varausVahvistettu"] else "EI vahvistettu"
         print(f"{varaus['nimi']} → {status}")
     print()
