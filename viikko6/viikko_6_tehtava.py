@@ -115,6 +115,7 @@ def main():
             kuukausi = int(input("Anna kuukauden numero (1-12): "))
             raportti = raportti_kuukausi(kuukausi, kulutusTuotanto2025)
             print("kuukausiraportti tulostuu...")
+            print("----------------------------")
             print(raportti)
         elif ensimmainen_valinta == 3:
             raportti = luo_vuosiraportti(kulutusTuotanto2025)
